@@ -1,4 +1,3 @@
-// چاوەڕێ دەکەین تا هەموو لاپەڕەکە بار دەبێت، ئینجا کۆدەکە کار پێدەکەین
 document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = document.getElementById('gameCanvas');
@@ -25,10 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         9: { speed: 8.0, length: 6000, obstacleTypes: ['pipe', 'flying'] }, 10: { speed: 9.0, length: 7000, obstacleTypes: ['goomba', 'pipe', 'flying'] }
     };
 
+    // --- **چارەسەری کێشەکە لێرەدایە** ---
     function setCanvasSize() {
         const container = document.getElementById('game-container');
-        canvas.width = Math.min(800, window.innerWidth * 0.95);
-        canvas.height = canvas.width * 0.5625; // 16:9 aspect ratio
+        // قەبارەی شاشە بە شێوەیەکی گونجاو لەگەڵ مۆبایلدا دادەنێین
+        canvas.width = Math.min(800, window.innerWidth * 0.98);
+        canvas.height = Math.min(450, window.innerHeight * 0.98);
         container.style.width = `${canvas.width}px`;
         container.style.height = `${canvas.height}px`;
         groundHeight = canvas.height - 50;
