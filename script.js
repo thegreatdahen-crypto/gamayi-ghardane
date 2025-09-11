@@ -1,3 +1,4 @@
+// چاوەڕێ دەکەین تا هەموو لاپەڕەکە بار دەبێت، ئینجا کۆدەکە کار پێدەکەین
 document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = document.getElementById('gameCanvas');
@@ -42,7 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cameraX = 0; obstacles = []; score = score || 0; gameActive = true;
         for (let i = 800; i < config.length - 200; i += Math.random() * 400 + 300) { createObstacle(i); }
         door = { x: config.length, y: groundHeight - 100, width: 80, height: 100 };
-        startScreen.style.display = 'none'; gameOverScreen.style.display = 'none'; levelCompleteScreen.style.display = 'none';
+        startScreen.style.display = 'none';
+        gameOverScreen.style.display = 'none';
+        levelCompleteScreen.style.display = 'none';
         if (gameLoop) cancelAnimationFrame(gameLoop);
         update();
     }
