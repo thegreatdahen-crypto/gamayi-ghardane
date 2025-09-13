@@ -24,38 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
         9: { speed: 8.0, length: 6000, obstacleTypes: ['pipe', 'flying'] }, 10: { speed: 9.0, length: 7000, obstacleTypes: ['goomba', 'pipe', 'flying'] }
     };
 
-    // --- **چارەسەری کێشەکە لێرەدایە** ---
-    function setCanvasSize() {
-        const container = document.getElementById('game-container');
-        // قەبارەی شاشە بە شێوەیەکی گونجاو لەگەڵ مۆبایلدا دادەنێین
-        canvas.width = Math.min(800, window.innerWidth * 0.98);
-        canvas.height = Math.min(450, window.innerHeight * 0.98);
-        container.style.width = `${canvas.width}px`;
-        container.style.height = `${canvas.height}px`;
-        groundHeight = canvas.height - 50;
-    }
-
-    function startLevel(level) {
-        currentLevel = level;
-        const config = levelConfig[level];
-        if (!config) { gameOver(true); return; }
-        setCanvasSize();
-        player = { x: 60, y: groundHeight - 60, width: 40, height: 60, velocityY: 0, isJumping: true };
-        cameraX = 0; obstacles = []; score = score || 0; gameActive = true;
-        for (let i = 800; i < config.length - 200; i += Math.random() * 400 + 300) { createObstacle(i); }
-        door = { x: config.length, y: groundHeight - 100, width: 80, height: 100 };
-        startScreen.style.display = 'none';
-        gameOverScreen.style.display = 'none';
-        levelCompleteScreen.style.display = 'none';
-        if (gameLoop) cancelAnimationFrame(gameLoop);
-        update();
-    }
-
+    function setCanvasSize() { const container = document.getElementById('game-container'); canvas.width = Math.min(800, window.innerWidth * 0.98); canvas.height = Math.min(450, window.innerHeight * 0.98); container.style.width = `${canvas.width}px`; container.style.height = `${canvas.height}px`; groundHeight = canvas.height - 50; }
+    function startLevel(level) { currentLevel = level; const config = levelConfig[level]; if (!config) { gameOver(true); return; } setCanvasSize(); player = { x: 60, y: groundHeight - 60, width: 40, height: 60, velocityY: 0, isJumping: true }; cameraX = 0; obstacles = []; score = score || 0; gameActive = true; for (let i = 800; i < config.length - 200; i += Math.random() * 400 + 300) { createObstacle(i); } door = { x: config.length, y: groundHeight - 100, width: 80, height: 100 }; startScreen.style.display = 'none'; gameOverScreen.style.display = 'none'; levelCompleteScreen.style.display = 'none'; if (gameLoop) cancelAnimationFrame(gameLoop); update(); }
     function createObstacle(posX) { const config = levelConfig[currentLevel]; const type = config.obstacleTypes[Math.floor(Math.random() * config.obstacleTypes.length)]; if (type === 'pipe') obstacles.push({ type, x: posX, y: groundHeight - 80, width: 50, height: 80 }); else if (type === 'goomba') obstacles.push({ type, x: posX, y: groundHeight - 40, width: 40, height: 40 }); else if (type === 'flying') obstacles.push({ type, x: posX, y: groundHeight - 150, width: 50, height: 30 }); }
     function drawPlayer() { const headRadius = 10; const bodyLength = 25; const armLength = 15; const legLength = 20; const headX = player.x + player.width / 2; const headY = player.y + headRadius; const bodyYStart = player.y + 2 * headRadius; const bodyYEnd = bodyYStart + bodyLength; const feetY = player.y + player.height; ctx.strokeStyle = 'white'; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.beginPath(); ctx.arc(headX, headY, headRadius, 0, Math.PI * 2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(headX, bodyYStart); ctx.lineTo(headX, bodyYEnd); ctx.stroke(); const animationAngle = player.isJumping ? 0.2 : Math.sin(Date.now() / 100) * 0.8; ctx.beginPath(); ctx.moveTo(headX, bodyYEnd); ctx.lineTo(headX + legLength * Math.sin(animationAngle), feetY); ctx.stroke(); ctx.beginPath(); ctx.moveTo(headX, bodyYStart + 5); ctx.lineTo(headX - armLength * Math.sin(animationAngle), bodyYStart + 15); ctx.stroke(); ctx.beginPath(); ctx.moveTo(headX, bodyYEnd); ctx.lineTo(headX - legLength * Math.sin(animationAngle), feetY); ctx.stroke(); ctx.beginPath(); ctx.moveTo(headX, bodyYStart + 5); ctx.lineTo(headX + armLength * Math.sin(animationAngle), bodyYStart + 15); ctx.stroke(); }
     function drawObstacle(obstacle) { const screenX = obstacle.x - cameraX; if (screenX > canvas.width || screenX + obstacle.width < 0) return; if (obstacle.type === 'pipe') { ctx.fillStyle = '#2ecc71'; ctx.fillRect(screenX, obstacle.y, obstacle.width, obstacle.height); ctx.fillRect(screenX - 5, obstacle.y, obstacle.width + 10, 20); } else if (obstacle.type === 'goomba') { ctx.fillStyle = '#c0392b'; ctx.beginPath(); ctx.arc(screenX + obstacle.width / 2, obstacle.y + obstacle.height / 2, obstacle.width / 2, 0, Math.PI * 2); ctx.fill(); } else if (obstacle.type === 'flying') { ctx.fillStyle = '#f1c40f'; ctx.fillRect(screenX, obstacle.y, obstacle.width, obstacle.height); } }
     function drawDoor() { const screenX = door.x - cameraX; if (screenX > canvas.width || screenX + door.width < 0) return; ctx.fillStyle = '#a9a9a9'; ctx.fillRect(screenX, door.y, door.width, door.height); ctx.fillStyle = '#5d4037'; ctx.fillRect(screenX + 15, door.y + 30, door.width - 30, door.height - 30); ctx.fillRect(screenX - 5, door.y - 15, 20, 15); ctx.fillRect(screenX + door.width - 15, door.y - 15, 20, 15); }
-    function gameOver(isWin = false) { gameActive = false; if (isWin) { gameOverTitle.textContent = "گەمەکە تەواو بوو!"; finalScoreElement.innerHTML = `مەمنونی داهێن بن گەمەکی ئەوها خۆشی لۆ دروست کردینە. <br> کۆی خاڵەکانت: ${Math.floor(score)}`; } else { gameOverTitle.textContent = "یاری کۆتایی هات!"; finalScoreElement.textContent = `دۆڕایت! خاڵ: ${Math.floor(score)} | ئاست: ${currentLevel}`; } gameOverScreen.style.display = 'flex'; }
+    
+    function gameOver(isWin = false) {
+        gameActive = false;
+        if (isWin) {
+            gameOverTitle.textContent = "گەمەکە تەواو بوو!";
+            finalScoreElement.innerHTML = `مەمنونی داهێن بن گەمەکی ئەوها خۆشی لۆ دروست کردینە. <br> کۆی خاڵەکانت: ${Math.floor(score)}`;
+        } else {
+            gameOverTitle.textContent = "بەو حارەی بەتەمای غاردەی؟";
+            finalScoreElement.textContent = `خاڵ: ${Math.floor(score)} | ئاست: ${currentLevel}`;
+        }
+        gameOverScreen.style.display = 'flex';
+    }
+
     function levelComplete() { gameActive = false; levelCompleteTitle.textContent = `ئاستی ${currentLevel} تەواو بوو!`; levelCompleteScreen.style.display = 'flex'; }
     function update() { if (!gameActive) return; const config = levelConfig[currentLevel]; cameraX += config.speed; score += config.speed * 0.01; ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#e67e22'; ctx.fillRect(0, groundHeight, canvas.width, 50); obstacles.forEach(drawObstacle); drawDoor(); drawPlayer(); player.y += player.velocityY; player.velocityY += 0.9; if (player.y >= groundHeight - player.height) { player.y = groundHeight - player.height; player.velocityY = 0; player.isJumping = false; } obstacles.forEach(obstacle => { const screenX = obstacle.x - cameraX; if (player.x < screenX + obstacle.width && player.x + player.width > screenX && player.y < obstacle.y + obstacle.height && player.y + player.height > obstacle.y) { gameOver(); } }); const doorScreenX = door.x - cameraX; if (player.x + player.width > doorScreenX) { levelComplete(); } ctx.fillStyle = 'white'; ctx.font = '30px Vazirmatn, Arial'; ctx.fillText(`خاڵ: ${Math.floor(score)}`, 20, 40); ctx.fillText(`ئاست: ${currentLevel}`, canvas.width - 150, 40); const progress = cameraX / config.length; ctx.fillStyle = '#bdc3c7'; ctx.fillRect(20, 60, 200, 15); ctx.fillStyle = '#2ecc71'; ctx.fillRect(20, 60, 200 * Math.min(progress, 1), 15); gameLoop = requestAnimationFrame(update); }
     function jump() { if (!gameActive) return; if (!player.isJumping) { player.isJumping = true; player.velocityY = -20; } }
