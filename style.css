@@ -1,13 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+/* ... (هەموو کۆدی پێشووی style.css وەک خۆی، تەنها ئەم ستایلە نوێیانەی بۆ زیاد بکە) ... */
 
-body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #5c94fc; display: flex; justify-content: center; align-items: center; font-family: 'Vazirmatn', sans-serif; }
-#game-container { position: relative; border: 5px solid #333; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); border-radius: 10px; max-width: 95vw; max-height: 95vh; }
-canvas { display: block; background-color: #5c94fc; }
-.overlay-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); color: white; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
-#start-screen { display: flex; }
-.overlay-content { margin-top: 3rem; }
-h1 { font-size: clamp(2rem, 10vw, 3.5rem); color: #f39c12; text-shadow: 3px 3px 0 #e67e22; margin: 0 0 1rem 0; font-weight: 700; }
-p { font-size: clamp(1rem, 4vw, 1.2rem); margin: 0 0 1.5rem 0; }
-button { padding: 1rem 2rem; font-size: clamp(1.2rem, 5vw, 1.5rem); border: none; border-radius: 15px; cursor: pointer; background-color: #2ecc71; color: white; border-bottom: 5px solid #27ae60; transition: all 0.1s ease; margin-top: 1rem; font-family: 'Vazirmatn', sans-serif; font-weight: 700; }
-button:active { transform: translateY(3px); border-bottom-width: 2px; }
-.creator-credit { padding-bottom: 10px; font-size: clamp(0.7rem, 2.5vw, 0.9rem); color: #bdc3c7; line-height: 1.5; }
+.difficulty-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.difficulty-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.difficulty-option button {
+    width: 80%;
+    max-width: 300px;
+}
+
+.difficulty-description {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    margin-top: 0.5rem;
+}
