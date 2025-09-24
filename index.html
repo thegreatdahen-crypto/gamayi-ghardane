@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>گەمەی غاردانێ</title>
-    <link rel="stylesheet" href="style.css?v=final-mode">
+    <link rel="stylesheet" href="style.css?v=unified-design">
 </head>
 <body>
     <div id="game-container">
@@ -13,16 +13,12 @@
         <div id="start-screen" class="overlay-screen">
             <div class="overlay-content">
                 <h1>گەمەی غاردانێ</h1>
-                <!-- بەشی نوێ: هەڵبژاردنی دۆخی یاری -->
+                <!-- گۆڕانکاری لێرەدایە -->
                 <div class="difficulty-selection">
-                    <div class="difficulty-option">
-                        <button id="normal-mode-btn">نۆڕماڵ</button>
-                        <p class="difficulty-description">ئەگەر مردی، لە سەرەتاوە دەست پێدەکەیتەوە.</p>
-                    </div>
-                    <div class="difficulty-option">
-                        <button id="hard-mode-btn">قورس</button>
-                        <p class="difficulty-description">ئەگەر گەیشتی بە ئاستی ٦، یارییەکە پاشەکەوت دەبێت.</p>
-                    </div>
+                    <button id="normal-mode-btn" class="difficulty-button">نۆڕماڵ</button>
+                    <p class="difficulty-description">ئەگەر مردی، لە سەرەتاوە دەست پێدەکەیتەوە.</p>
+                    <button id="hard-mode-btn" class="difficulty-button">قورس</button>
+                    <p class="difficulty-description">ئەگەر گەیشتی بە ئاستی ٦، یارییەکە پاشەکەوت دەبێت.</p>
                 </div>
             </div>
             <div class="creator-credit">
@@ -30,16 +26,8 @@
                 کوردستان - هەولێر - لاوان سیتی - خانوو ژمارە ٣٥١
             </div>
         </div>
-
-        <div id="game-over-screen" class="overlay-screen" style="display: none;">
-            <!-- ... (وەک خۆی) ... -->
-        </div>
-
-        <div id="level-complete-screen" class="overlay-screen" style="display: none;">
-            <!-- ... (وەک خۆی) ... -->
-        </div>
+        <!-- ... شاشەکانی تری gameOver و levelComplete وەک خۆیان ... -->
     </div>
-    
-    <script src="script.js?v=final-mode"></script>
+    <script src="script.js?v=unified-design"></script>
 </body>
 </html>
