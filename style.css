@@ -1,26 +1,40 @@
-/* ... (هەموو کۆدی پێشووی style.css وەک خۆی، تەنها ئەم ستایلە نوێیانەی بۆ زیاد بکە) ... */
+/* ... (هەموو کۆدی سەرەتای style.css وەک خۆی) ... */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+body, html { /* ... وەک خۆی ... */ }
+#game-container { /* ... وەک خۆی ... */ }
+canvas { /* ... وەک خۆی ... */ }
+.overlay-screen { /* ... وەک خۆی ... */ }
+#start-screen { display: flex; }
+.overlay-content { /* ... وەک خۆی ... */ }
+h1 { /* ... وەک خۆی ... */ }
+p { /* ... وەک خۆی ... */ }
+button { /* ... وەک خۆی ... */ }
+.creator-credit { /* ... وەک خۆی ... */ }
 
+/* --- ستایلی نوێ بۆ شاشەی دەستپێک --- */
 .difficulty-selection {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     width: 100%;
+    max-width: 350px;
 }
 
-.difficulty-option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.difficulty-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #2ecc71; /* ڕەنگی سەوز */
+    border-bottom: 5px solid #27ae60;
 }
 
-.difficulty-option button {
-    width: 80%;
-    max-width: 300px;
+#hard-mode-btn {
+    background-color: #e74c3c; /* ڕەنگی سوور بۆ قورس */
+    border-bottom-color: #c0392b;
+    margin-top: 1.5rem;
 }
 
 .difficulty-description {
     font-size: 0.9rem;
     color: #bdc3c7;
     margin-top: 0.5rem;
+    margin-bottom: 0;
 }
