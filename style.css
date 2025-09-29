@@ -1,40 +1,84 @@
-/* ... (هەموو کۆدی سەرەتای style.css وەک خۆی) ... */
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-body, html { /* ... وەک خۆی ... */ }
-#game-container { /* ... وەک خۆی ... */ }
-canvas { /* ... وەک خۆی ... */ }
-.overlay-screen { /* ... وەک خۆی ... */ }
-#start-screen { display: flex; }
-.overlay-content { /* ... وەک خۆی ... */ }
-h1 { /* ... وەک خۆی ... */ }
-p { /* ... وەک خۆی ... */ }
-button { /* ... وەک خۆی ... */ }
-.creator-credit { /* ... وەک خۆی ... */ }
+**style.css (CSS)**
 
-/* --- ستایلی نوێ بۆ شاشەی دەستپێک --- */
-.difficulty-selection {
-    margin-top: 1.5rem;
+```css
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #87CEEB, #98FB98);
+    overflow: hidden;
+    direction: rtl;
+}
+
+.screen {
+    position: absolute;
     width: 100%;
-    max-width: 350px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
 }
 
-.difficulty-button {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.5rem;
-    background-color: #2ecc71; /* ڕەنگی سەوز */
-    border-bottom: 5px solid #27ae60;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-#hard-mode-btn {
-    background-color: #e74c3c; /* ڕەنگی سوور بۆ قورس */
-    border-bottom-color: #c0392b;
-    margin-top: 1.5rem;
+.title {
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: bold;
+    color: #2C3E50;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.difficulty-description {
-    font-size: 0.9rem;
-    color: #bdc3c7;
+.subtitle {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: #34495E;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.creator-info {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    color: #2C3E50;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.button {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    border-radius: 25px;
+    color: white;
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    min-width: 200px;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.mode-description {
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    color: #555;
+    text-align: center;
     margin-top: 0.5rem;
-    margin-bottom: 0;
+    max-width: 300px;
 }
+```
