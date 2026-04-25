@@ -1,6 +1,3 @@
-**index.html (HTML)**
-
-```html
 <!DOCTYPE html>
 <html lang="ku">
 <head>
@@ -10,7 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="screen">
+
+    <!-- Confetti Layer -->
+    <div id="confetti-container"></div>
+
+    <!-- ===== Menu Screen ===== -->
+    <div class="screen active" id="menu-screen">
         <h1 class="title">گەمەی غاردانێ</h1>
         <p class="subtitle">دەزانی غاردەی؟</p>
         <div class="creator-info">
@@ -21,7 +23,41 @@
         <button class="button" onclick="chooseMode('hard')">قورس</button>
         <p class="mode-description">ئەگەر گەیشتی بە ئاستی ٦، یارییەکە پاشەکەوت دەبێت.</p>
     </div>
+
+    <!-- ===== Game Screen ===== -->
+    <div class="screen" id="game-screen">
+        <div class="game-header">
+            <span id="level-display">ئاست: ١</span>
+            <span id="mode-label">⭐ نۆڕماڵ</span>
+            <span id="attempts-display">هەوڵی ماوە: ١٠</span>
+        </div>
+
+        <div class="range-badge" id="range-display">ژمارەیەک لە ١ تا ١٠</div>
+
+        <div class="feedback" id="feedback">ژمارەکە حەزبکە!</div>
+
+        <div class="input-row">
+            <input type="number" id="guess-input" placeholder="ژمارە..." min="1" max="10" />
+            <button class="submit-btn" onclick="submitGuess()">بنێرە ✔</button>
+        </div>
+
+        <div id="attempt-dots"></div>
+
+        <button class="hint-btn" onclick="giveHint()">💡 ئامۆژگاری (هەوڵ دەخوات)</button>
+        <div id="hint-text"></div>
+
+        <button class="back-btn" onclick="showScreen('menu-screen')">↩ گەڕانەوە</button>
+    </div>
+
+    <!-- ===== End Screen ===== -->
+    <div class="screen" id="end-screen">
+        <h1 id="end-title">یاری تەواو بوو</h1>
+        <p id="end-message">چاکەی دیسان هەوڵ بدە!</p>
+        <div id="end-score">کۆی خاڵەکانت: ٠</div>
+        <button class="button" onclick="restartGame()">🔄 دیسان بازی بکە</button>
+        <button class="back-btn" onclick="showScreen('menu-screen')">↩ گەڕانەوە بۆ مینیو</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-```
